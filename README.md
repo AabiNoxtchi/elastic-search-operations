@@ -181,6 +181,23 @@ These clients provide the following beans to work with:
 1. [Elasticsearch data types](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#object-types)
 2. [Object mappings](https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/object-mapping.html)
   
+*********
+
+### Managing Elasticsearch Indices and Schema Updates in Spring Boot
+
+1. Handling Index Schema Changes: elasticsearch is schema-free by default, but it requires explicit mappings when controlling
+how fields are indexed and analyzed. Managing index schema updates requires careful planning, as schema changes in Elasticsearch
+cannot be performed directly once an index is created.
+**Strategies to Manage Schema Updates:**
+- Reindexing (Preferred Approach): If schema changes are required (e.g., adding new fields, changing field types). This process involves:
+  - Creating a new index with the updated schema.
+  - copy data from the old index to the new one.
+  - Updating the application to point to the new index.
+  - Deleting the old index (optional after verifying the new index works as expected).
+- Index Templates
+- Versioning Indices
+- using the Elasticsearch Reindex API
+- Index Aliases
 
 <br><br><br>
 ### Reference Documentation
