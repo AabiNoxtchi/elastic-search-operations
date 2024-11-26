@@ -31,6 +31,8 @@ So, in summary, Elasticsearch is a specialized engine designed for fast, scalabl
 - Community: Strong ecosystem with active community support.
 - Ideal for applications like log monitoring, e-commerce product searches, and system metrics tracking.  
 
+**usage in repositories and test packages**
+****  
 ### Using ElasticsearchRepository 
 
 Elasticsearch repositories comes with predefined methods and allow custom query definitions.  
@@ -80,8 +82,8 @@ Deletes all documents of the given type from the Elasticsearch index, with an op
    <br>
 - By using a [manually defined query using @Query for advanced queries](https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/repositories/elasticsearch-repository-queries.html)
 <br><br>  
-
-**text fields search**
+*******  
+### Text fields search
 1. Designed for Full-Text Search
    Elasticsearch is built on Apache Lucene, which is optimized for searching text. It indexes data in a way that supports 
 analyzing text into individual tokens (e.g., words or phrases). When a query is executed, Elasticsearch tries to find documents 
