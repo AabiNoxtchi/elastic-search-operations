@@ -1,7 +1,7 @@
 package com.example.elasticSearch.repositories;
 
 
-import com.example.elasticSearch.models.document.Student;
+import com.example.elasticSearch.models.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

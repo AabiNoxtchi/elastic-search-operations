@@ -1,6 +1,6 @@
 package com.example.elasticSearch.repositories;
 
-import com.example.elasticSearch.models.document.Student;
+import com.example.elasticSearch.models.Student;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
