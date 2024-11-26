@@ -114,10 +114,75 @@ It ensures that the value in the query matches the stored value in Elasticsearch
   is defined as text with a keyword subfield, the query is specifically targeting the exact value stored in the keyword subfield.
 
 ****
+### Elasticsearch Command Line (cURL) Commands
 
-<br>   
+Useful commands to check and debug elasticsearch through cmd:  
+1. Check All Indices
+   To view all indices in the Elasticsearch cluster:
+   ```shell
+    curl -X GET "localhost:9200/_cat/indices?v"
+    ```
+   
+2. View Index Mapping
+   To check the mapping of a specific index:
+   ```shell
+    curl -X GET "localhost:9200/<index_name>/_mapping?pretty"
+    ```
+   
+3. View Index Data
+   To retrieve documents from an index using a query:
+   ```shell
+    curl -X GET "localhost:9200/student_v2/_search?pretty" -H "Content-Type: application/json" -d "{\"query\":{\"has_child\":{\"type\":\"enrollment\",\"query\":{\"match_all\":{}},\"min_children\":6}}}" 
+    curl -X GET "localhost:9200/student_v2/_search?pretty" -H "Content-Type: application/json" -d "{\"query\":{\"match_all\":{}}}"
+    ```
+*************
+### Spring Boot elasticsearch clients
 
-<br><br>
+Spring Boot provides seamless integration with Elasticsearch through various clients, it offers both imperative and reactive Elasticsearch clients.  
+**The imperative client** is synchronous and blocks the thread for each operation, making it suitable for traditional applications.  
+**The reactive client** is non-blocking and leverages Project Reactor, enabling high-performance, asynchronous interactions ideal for reactive programming models.  
+
+**List of Spring Boot Elasticsearch Clients:**  
+1. Elasticsearch Rest High-Level Client (Deprecated):
+A synchronous client that was the default for older Spring Boot versions using Elasticsearch <8.x.
+Deprecated as of Elasticsearch 7.15 and replaced by the Elasticsearch Java Client in Elasticsearch 8.x.
+2. Elasticsearch Java Client (Recommended):
+The official modern client introduced in Elasticsearch 8.x.
+Fully supports synchronous and asynchronous programming.
+Recommended by Elastic as the replacement for the High-Level Client.
+3. Elasticsearch Reactive Client:
+A non-blocking, reactive client based on Spring WebFlux and Project Reactor.
+Ideal for applications requiring asynchronous operations and reactive programming models.
+4. Spring Data Elasticsearch:
+A higher-level abstraction provided by Spring, integrating Elasticsearch with Spring Boot.
+Built on top of the Elasticsearch Java Client and supports repository and template-based data access.
+**Default Client in Spring Boot:**
+The default client depends on the Spring Data Elasticsearch version and Elasticsearch version:
+Spring Boot <2.6: Used the Rest High-Level Client as the default.
+Spring Boot 2.6+: Transitioned to using the Elasticsearch Java Client by default, aligning with Elasticsearch 8.x.
+
+These clients provide the following beans to work with:
+1. RestClient:
+   - Level: Low-level HTTP.
+   - Purpose: Handles raw HTTP requests to Elasticsearch. Part of the Rest High-Level Client.
+   - Use Case: Low-level direct communication with Elasticsearch.
+2. ElasticsearchClient:
+    - Level: High-level API.
+    - Purpose: Provides a modern, feature-rich Java API for interacting with Elasticsearch, built on top of RestClient.
+    - Use Case: General-purpose client for Elasticsearch 8.x+ (imperative and reactive APIs).
+3. ElasticsearchOperations:
+    - Level: Spring abstraction.
+    - Purpose: A higher-level abstraction provided by Spring Data Elasticsearch for working with Elasticsearch in Spring applications.
+    - Use Case: Spring-based applications performing common Elasticsearch operations (CRUD, queries).
+*******
+
+### Spring Boot Elasticsearch Field, Objects and Relational Types
+
+1. [Elasticsearch data types](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html#object-types)
+2. [Object mappings](https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/object-mapping.html)
+  
+
+<br><br><br>
 ### Reference Documentation
 For further reference, please consider the following sections:
 
