@@ -1,5 +1,6 @@
 package com.example.elasticSearch.models;
 
+import com.example.elasticSearch.annotations.ValidEnrollmentChildRelation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -33,8 +34,8 @@ public class Enrollment {
     @Field(type = FieldType.Keyword)
     private String courseName; // Denormalized course name
 
-    @NotNull
-    // todo: custom annotation ensuring parent is not null
+    @NotNull(message = "Parent relation must not be null")
+    @ValidEnrollmentChildRelation
     @JoinTypeRelations(
             relations = {
                     @JoinTypeRelation(parent = "student", children = {ENROLLMENT_RELATION_NAME})
